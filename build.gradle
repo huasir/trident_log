@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'fatjar'
+
+ext.baseName = 'word_trident'
+group = 'io.unimatic.platform'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+compileJava.options.encoding = 'UTF-8'
+javadoc.options.encoding = 'UTF-8'
+
+dependencies {
+    compile 'storm:storm:0.9.0.1', {
+        ext {
+            fatJarExclude = true
+        }
+    }
+    compile 'org.springframework:spring-context:4.0.0.RELEASE'
+}

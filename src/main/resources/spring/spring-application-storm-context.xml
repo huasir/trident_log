@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="stormAppender" class="io.unimatic.platform.StormAppender">
+    <property name="topic" value="trident_count"/>
+    <property name="pattern" value="%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="name" value="STAPPENDER"/>
+  </bean>
+  <bean id="springLogbackBean" class="io.unimatic.platform.SpringLogbackBean"
+        lazy-init="false">
+    <property name="appender" ref="stormAppender"/>
+    <property name="filterLevel" value="DEBUG"/>
+    <property name="logName">
+      <map>
+        <entry key="io.unimatic.platform" value="DEBUG"/>
+      </map>
+    </property>
+  </bean>
+</beans>
