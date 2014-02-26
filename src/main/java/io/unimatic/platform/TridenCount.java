@@ -1,7 +1,6 @@
 package io.unimatic.platform;
 
 import backtype.storm.Config;
-import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.AlreadyAliveException;
 import backtype.storm.generated.InvalidTopologyException;
@@ -35,10 +34,10 @@ public class TridenCount {
         conf.setDebug(true);
         conf.registerMetricsConsumer(LoggingMetricsConsumer.class, 2);
 
-        LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology(TOPOLOGY_NAME, conf, topology.build());
+//        LocalCluster cluster = new LocalCluster();
+//        cluster.submitTopology(TOPOLOGY_NAME, conf, topology.build());
 
-//        conf.setNumWorkers(2);
-//        StormSubmitter.submitTopology(TOPOLOGY_NAME, conf, topology.build());
+        conf.setNumWorkers(2);
+        StormSubmitter.submitTopology(TOPOLOGY_NAME, conf, topology.build());
     }
 }

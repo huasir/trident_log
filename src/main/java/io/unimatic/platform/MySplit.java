@@ -1,23 +1,15 @@
 package io.unimatic.platform;
 
-import backtype.storm.metric.api.CountMetric;
 import backtype.storm.tuple.Values;
+import org.slf4j.Logger;
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
-import storm.trident.operation.TridentOperationContext;
 import storm.trident.tuple.TridentTuple;
-
-import java.util.Map;
 
 public class MySplit extends BaseFunction {
 
-    transient LogMetric logMetric;
-
-    @Override
-    public void prepare(Map conf, TridentOperationContext context) {
-        logMetric = new LogMetric(MySplit.class);
-        context.registerMetric("split", logMetric, 10);
-    }
+    private static final Logger logger = LoggerFactory.getLogger(MySplit.class,
+            TridenCount.TOPOLOGY_NAME);
 
     @Override
     public void execute(TridentTuple tuple, TridentCollector collector) {
@@ -25,7 +17,7 @@ public class MySplit extends BaseFunction {
             if (word.length() > 0) {
                 collector.emit(new Values(word));
             }
-            logMetric.debug("word length is {}",word.length());
+            logger.debug("word length is {}", word.length());
         }
     }
 

@@ -22,6 +22,5 @@
 
   <logger name="io.unimatic" level="DEBUG">
     <appender-ref ref="FILE"/>
-    <appender-ref ref="STDOUT"/>
   </logger>
 </configuration>
